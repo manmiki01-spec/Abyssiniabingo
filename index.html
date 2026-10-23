@@ -1,4 +1,4 @@
-<!-- Header -->
+<!-- Header --> 
 <header class="w-full max-w-md mx-auto bg-slate-800 p-4 rounded-2xl shadow-lg flex justify-between items-center mb-4 border border-slate-700">
     <div>
         <h1 class="text-lg font-bold text-yellow-400">🇪🇹 አቢሲኒያ ቢንጎ</h1>
@@ -58,8 +58,7 @@
 </main>
 
 <!-- Deposit Modal (Min 50 Birr & Telebirr 0998292907) -->
-<div id="deposit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-<div class="bg-slate-800 w-full max-w-sm p-5 rounded-2xl border border-slate-700 shadow-2xl">
+<div id="deposit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50"><div class="bg-slate-800 w-full max-w-sm p-5 rounded-2xl border border-slate-700 shadow-2xl">
         <h3 class="text-lg font-bold text-yellow-400 mb-2">💳 በቴሌብር ብር ማስገባት (Deposit)</h3>
         <p class="text-xs text-slate-300 mb-3">
             ብር ለማስገባት በቅድሚያ ከዚህ በታች ባለው ቁጥር ዝቅተኛው መጠን <strong class="text-white">50 ብር እና ከዛ በላይ</strong> ያስተላልፉ።
@@ -129,8 +128,7 @@
         document.getElementById('user-balance').innerText = flex justify-between items-cent
     }
 
-    function selectStake(amount, commission) {
-if (userBalance < amount) {
+    function selectStake(amount, commission) {if (userBalance < amount) {
             alert(`የእርስዎ አካውንት ባላንስ (${userBalance} ብር) የ ${amount} ብር ካርድ ለመግዛት በቂ አይደለም። እባክዎ መጀመሪያ ብር ያስገቡ (ቢያንስ 50 ብር)!`);
             return;
         }
@@ -233,3 +231,7 @@ if (userBalance < amount) {
 
     updateUI();
 </script>
+</body>
+</html>
+
+
