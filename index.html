@@ -6,13 +6,13 @@
     <title>Abyssinia Bingo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center p-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center p-4 justify-between">
 
-    <!-- Header / Branding -->
-    <header class="w-full max-w-md mx-auto bg-slate-900 p-4 rounded-2xl shadow-lg flex justify-between items-center mb-4 border border-slate-800">
+    <!-- Header / Branding (Visible only after login) -->
+    <header id="app-header" class="w-full max-w-md mx-auto bg-slate-900 p-4 rounded-2xl shadow-lg flex justify-between items-center mb-4 border border-slate-800 hidden">
         <div>
             <h1 class="text-lg font-bold text-yellow-400">🇪🇹 አቢሲኒያ ቢንጎ</h1>
-            <p id="username" class="text-xs text-slate-400">ተጫዋች: ...</p>
+            <p id="username" class="text-xs text-slate-400">ተጠቃሚ: ...</p>
         </div>
         <div class="text-right bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
             <span class="text-xs text-slate-400 block">ሒሳብ (Balance)</span>
@@ -20,9 +20,29 @@
         </div>
     </header>
 
-    <!-- Main Content Area (Home View) -->
-    <main id="home-view" class="w-full max-w-md mx-auto flex-1 flex flex-col gap-4">
+    <!-- 1. Registration / Login View (Shows First) -->
+    <div id="auth-view" class="w-full max-w-md mx-auto my-auto bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl flex flex-col gap-4">
+        <div class="text-center mb-2">
+            <h1 class="text-xl font-bold text-yellow-400">🇪🇹 አቢሲኒያ ቢንጎ</h1>
+            <p class="text-xs text-slate-400 mt-1">ለመጫወት እባክዎ በስልክ ቁጥርዎ ይመዝገቡ ወይም ይግቡ</p>
+        </div>
+        <div class="flex flex-col gap-3">
+            <div>
+                <label class="text-xs text-slate-400 block mb-1">ስልክ ቁጥር</label>
+                <input type="tel" id="auth-phone" placeholder="09xxxxxxxx" class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl text-sm text-white outline-none focus:border-yellow-400">
+            </div>
+            <div>
+                <label class="text-xs text-slate-400 block mb-1">ሚስጥር ቁጥር (Password)</label>
+                <input type="password" id="auth-pass" placeholder="********" class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl text-sm text-white outline-none focus:border-yellow-400">
+            </div>
+            <button onclick="handleAuth()" class="w-full bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg mt-2">
+                ግባ / ተመዝገብ (Login / Register)
+            </button>
+        </div>
+    </div>
 
+    <!-- 2. Main Dashboard View (Home - Hidden initially) -->
+    <main id="home-view" class="w-full max-w-md mx-auto flex-1 flex flex-col gap-4 hidden">
         <!-- Action Buttons (Deposit / Withdraw) -->
         <div class="grid grid-cols-2 gap-3">
             <button onclick="openDepositModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
@@ -33,27 +53,17 @@
             </button>
         </div>
 
-        <!-- Stake / Betting Options (Clean, No Commission Text Outside) -->
+        <!-- Stake / Betting Options -->
         <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 shadow-md">
             <h2 class="text-sm font-semibold text-yellow-400 mb-3 text-center">
                 🎮 የካርድ ዋጋ ይምረጡ (ቢያንስ 50 ብር)
             </h2>
             <div class="grid grid-cols-3 gap-2 mb-3">
-                <button onclick="selectStake(10)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="10">
-                    10 ብር
-                </button>
-                <button onclick="selectStake(20)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="20">
-                    20 ብር
-                </button>
-                <button onclick="selectStake(50)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="50">
-                    50 ብር
-                </button>
-                <button onclick="selectStake(100)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="100">
-                    100 ብር
-                </button>
-                <button onclick="selectStake(200)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="200">
-                    200 ብር
-                </button>
+                <button onclick="selectStake(10)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="10">10 ብር</button>
+                <button onclick="selectStake(20)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="20">20 ብር</button>
+                <button onclick="selectStake(50)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="50">50 ብር</button>
+                <button onclick="selectStake(100)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="100">100 ብር</button>
+                <button onclick="selectStake(200)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition font-bold text-sm" data-stake="200">200 ብር</button>
             </div>
             <p id="selected-stake-info" class="text-xs text-slate-400 text-center mb-2">እባክዎ መጀመሪያ የካርድ ዋጋ ይምረጡ</p>
             <button onclick="startPlay()" class="w-full bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold py-3 rounded-xl transition shadow-lg">
@@ -62,17 +72,15 @@
         </div>
     </main>
 
-    <!-- Game Arena View (Inside Game - Hidden by default, opens when play starts) -->
+    <!-- 3. Game Arena View (Inside Game - Hidden by default) -->
     <div id="game-view" class="w-full max-w-md mx-auto flex-1 flex flex-col gap-4 hidden">
         <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 shadow-md flex flex-col items-center gap-3">
             <div class="w-full flex justify-between items-center">
                 <span id="game-info" class="text-xs text-yellow-400 font-bold">ውርርድ: 0 ብር</span>
                 <button onclick="returnToHome()" class="bg-red-600/80 hover:bg-red-600 text-white text-xs px-3 py-1 rounded-lg">ውጣ (Exit)</button>
             </div>
-            
             <h3 class="text-xs text-slate-400">የተጠራው ቁጥር (Called Number)</h3>
             <div id="called-number" class="text-5xl font-extrabold text-emerald-400 bg-slate-950 px-8 py-4 rounded-2xl border border-slate-800 shadow-inner">--</div>
-            
             <button onclick="callNextNumber()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-xl text-xs transition shadow">
                 🔊 ቀጣይ ቁጥር ጥራ
             </button>
@@ -83,9 +91,7 @@
             <div class="grid grid-cols-5 gap-1.5 text-center font-bold mb-2 text-yellow-400 text-xs">
                 <span>B</span><span>I</span><span>N</span><span>G</span><span>O</span>
             </div>
-            <div id="bingo-card" class="grid grid-cols-5 gap-1.5">
-                <!-- Dynamically generated bingo cells -->
-            </div>
+            <div id="bingo-card" class="grid grid-cols-5 gap-1.5"></div>
         </div>
     </div>
 
@@ -127,18 +133,32 @@
     </footer>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        if(tg && tg.expand) { tg.expand(); }
-
         let userBalance = 0.00;
         let currentStake = 0;
-        let calledNumbersList = [];
+        let currentUserPhone = "";
 
-        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            const user = tg.initDataUnsafe.user;
-            document.getElementById('username').innerText = `ተጫዋች: ${user.first_name || 'ဧည့်ኛ'}`;
-        } else {
-            document.getElementById('username').innerText = 'ተጫዋች (ဧည့်ኛ)';
+        function handleAuth() {
+            const phone = document.getElementById('auth-phone').value.trim();
+            const pass = document.getElementById('auth-pass').value.trim();
+
+            if (!phone || phone.length < 9) {
+                alert('⚠️ እባክዎ ትክክለኛ ስልክ ቁጥር ያስገቡ!');
+                return;
+            }
+            if (!pass) {
+                alert('⚠️ እባክዎ ሚስጥር ቁጥር (Password) ያስገቡ!');
+                return;
+            }
+
+            currentUserPhone = phone;
+            document.getElementById('username').innerText = `ተጠቃሚ: ${phone}`;
+            
+            // Hide Auth View and Show Main Dashboard
+            document.getElementById('auth-view').classList.add('hidden');
+            document.getElementById('app-header').classList.remove('hidden');
+            document.getElementById('home-view').classList.remove('hidden');
+            
+            updateUI();
         }
 
         function updateUI() {
@@ -147,7 +167,6 @@
 
         function selectStake(amount) {
             currentStake = amount;
-            // Highlight selected button
             document.querySelectorAll('.stake-btn').forEach(btn => {
                 btn.classList.remove('border-yellow-400', 'bg-slate-700');
                 if(btn.getAttribute('data-stake') == amount) {
@@ -179,7 +198,6 @@
             userBalance -= currentStake;
             updateUI();
 
-            // Switch views from Home to Game Arena
             document.getElementById('home-view').classList.add('hidden');
             document.getElementById('game-view').classList.remove('hidden');
             document.getElementById('game-info').innerText = `ውርርድ: ${currentStake} ብር`;
@@ -196,7 +214,6 @@
         function generateBingoCard() {
             const cardContainer = document.getElementById('bingo-card');
             cardContainer.innerHTML = '';
-            // Generate 25 random mock numbers for 5x5 card
             let numbers = [];
             while(numbers.length < 25) {
                 let r = Math.floor(Math.random() * 75) + 1;
@@ -228,8 +245,6 @@
         }
 
         function closeDepositModal() {
-            document.getElementById('depositModal').classList.remove('hidden');
-            document.getElementById('depositModal').classList.add('flex');
             document.getElementById('depositModal').classList.remove('flex');
             document.getElementById('depositModal').classList.add('hidden');
         }
@@ -249,7 +264,7 @@
 
             userBalance += amount;
             updateUI();
-            alert(`✅ ${amount} ብር የጠየቁት ጥያቄ ተልኳል!`);
+            alert(`✅ ${amount} ብር የጠየቁት የዲፖዚት ጥያቄ ተልኳል!`);
             closeDepositModal();
         }
 
@@ -285,8 +300,6 @@
             alert(`✅ ${amount} ብር የማውጣት ጥያቄ ተልኳል!`);
             closeWithdrawModal();
         }
-
-        updateUI();
     </script>
 </body>
 </html>
