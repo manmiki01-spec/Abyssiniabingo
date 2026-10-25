@@ -6,241 +6,255 @@
     <title>Abyssinia Bingo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<!-- Header --> 
-<header class="w-full max-w-md mx-auto bg-slate-800 p-4 rounded-2xl shadow-lg flex justify-between items-center mb-4 border border-slate-700">
-    <div>
-        <h1 class="text-lg font-bold text-yellow-400">🇪🇹 አቢሲኒያ ቢንጎ</h1>
-        <p id="username" class="text-xs text-slate-400">ተጫዋች: ...</p>
-    </div>
-    <div class="text-right bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-700">
-        <span class="text-xs text-slate-400 block">ሂሳብ (Balance)</span>
-        <span id="user-balance" class="text-emerald-400 font-bold text-sm">0.00 ብር</span>
-    </div>
-</header>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center p-4">
 
-<!-- Main Content Area -->
-<main class="w-full max-w-md mx-auto flex-1 flex flex-col gap-4">
-    
-    <!-- Action Buttons (Deposit / Withdraw) -->
-    <div class="grid grid-cols-2 gap-3">
-        <button onclick="openDepositModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-            <span>➕ ብር አስገባ (Deposit)</span>
-        </button>
-        <button onclick="openWithdrawModal()" class="bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-            <span>📤 ብር አውጣ (Withdraw)</span>
-        </button>
-    </div>
+    <!-- Header / Branding -->
+    <header class="w-full max-w-md mx-auto bg-slate-900 p-4 rounded-2xl shadow-lg flex justify-between items-center mb-4 border border-slate-800">
+        <div>
+            <h1 class="text-lg font-bold text-yellow-400">🇪🇹 አቢሲኒያ ቢንጎ</h1>
+            <p id="username" class="text-xs text-slate-400">ተጫዋች: ...</p>
+        </div>
+        <div class="text-right bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+            <span class="text-xs text-slate-400 block">ሒሳብ (Balance)</span>
+            <span id="user-balance" class="text-emerald-400 font-bold text-sm">0.00 ብር</span>
+        </div>
+    </header>
 
-    <!-- Bet Options / Card Pricing -->
-    <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 shadow-lg">
-        <h2 class="text-sm font-semibold text-slate-300 mb-3">🎮 የካርድ ዋጋ ይምረጡ (ቢያንስ 50 ብር ዴፖዚት ይጠይቃል)</h2>
-        <div class="grid grid-cols-3 gap-2">
-            <button onclick="selectStake(10, 12)" class="bg-slate-700 hover:bg-yellow-500 hover:text-slate-950 p-3 rounded-xl text-center font-bold transition border border-slate-600">
-                10 ብር <span class="block text-[10px] text-yellow-400 font-normal">12% ኮሚሽን</span>
+    <!-- Main Content Area -->
+    <main class="w-full max-w-md mx-auto flex-1 flex flex-col gap-4">
+
+        <!-- Action Buttons (Deposit / Withdraw) -->
+        <div class="grid grid-cols-2 gap-3">
+            <button onclick="openDepositModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                <span>➕ ብር አገባ (Deposit)</span>
             </button>
-            <button onclick="selectStake(20, 12)" class="bg-slate-700 hover:bg-yellow-500 hover:text-slate-950 p-3 rounded-xl text-center font-bold transition border border-slate-600">
-                20 ብር <span class="block text-[10px] text-yellow-400 font-normal">12% ኮሚሽን</span>
-            </button>
-            <button onclick="selectStake(50, 10)" class="bg-slate-700 hover:bg-yellow-500 hover:text-slate-950 p-3 rounded-xl text-center font-bold transition border border-slate-600">
-                50 ብር <span class="block text-[10px] text-yellow-400 font-normal">10% ኮሚሽን</span>
-            </button>
-            <button onclick="selectStake(100, 10)" class="bg-slate-700 hover:bg-yellow-500 hover:text-slate-950 p-3 rounded-xl text-center font-bold transition border border-slate-600">
-                100 ብር <span class="block text-[10px] text-yellow-400 font-normal">10% ኮሚሽን</span>
-            </button>
-            <button onclick="selectStake(200, 10)" class="bg-slate-700 hover:bg-yellow-500 hover:text-slate-950 p-3 rounded-xl text-center font-bold transition border border-slate-600 col-span-2">
-                200 ብር <span class="block text-[10px] text-yellow-400 font-normal">10% ኮሚሽን</span>
+            <button onclick="openWithdrawModal()" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                <span>📤 ብር አውጣ (Withdraw)</span>
             </button>
         </div>
+
+        <!-- Stake / Betting Options -->
+        <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 shadow-md">
+            <h2 class="text-sm font-semibold text-yellow-400 mb-3 flex items-center gap-2">
+                🎮 የክፍያ ዋጋ ይምረጡ (ቢያንስ 50 ብር ዳይቨርት ይጠይቃል)
+            </h2>
+            <div class="grid grid-cols-3 gap-2 mb-3">
+                <button onclick="selectStake(10, 12)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition">
+                    <span class="block font-bold text-sm">10 ብር</span>
+                    <span class="text-[10px] text-emerald-400">12% ኮሚሽን</span>
+                </button>
+                <button onclick="selectStake(20, 12)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition">
+                    <span class="block font-bold text-sm">20 ብር</span>
+                    <span class="text-[10px] text-emerald-400">12% ኮሚሽን</span>
+                </button>
+                <button onclick="selectStake(50, 10)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition">
+                    <span class="block font-bold text-sm">50 ብር</span>
+                    <span class="text-[10px] text-emerald-400">10% ኮሚሽን</span>
+                </button>
+                <button onclick="selectStake(100, 10)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition">
+                    <span class="block font-bold text-sm">100 ብር</span>
+                    <span class="text-[10px] text-emerald-400">10% ኮሚሽን</span>
+                </button>
+                <button onclick="selectStake(200, 10)" class="stake-btn bg-slate-800 hover:bg-slate-700 p-3 rounded-xl text-center border border-slate-700 transition">
+                    <span class="block font-bold text-sm">200 ብር</span>
+                    <span class="text-[10px] text-emerald-400">10% ኮሚሽን</span>
+                </button>
+            </div>
+            <p id="selected-stake-info" class="text-xs text-slate-400 text-center">እባክዎ መጀመሪያ የክፍያ ዋጋ ይምረጡ</p>
+            <button onclick="startPlay()" class="w-full mt-3 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold py-2.5 rounded-xl transition">
+                🚀 ጨዋታ ጀምር
+            </button>
+        </div>
+
+        <!-- Bingo Voice Caller Simulation Box -->
+        <div id="game-arena" class="bg-slate-900 p-4 rounded-2xl border border-slate-800 shadow-md hidden flex flex-col items-center gap-3">
+            <h3 class="text-sm font-bold text-yellow-400">🎲 የቢንጎ ጥሪ ማዕከል (Live Caller)</h3>
+            <div id="called-number" class="text-4xl font-extrabold text-emerald-400 bg-slate-950 px-6 py-4 rounded-2xl border border-slate-800">--</div>
+            <p id="caller-status" class="text-xs text-slate-400 text-center">ቁጥሮች በድምጽ እየተጠሩ ነው...</p>
+            <button onclick="callNextNumber()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold py-2 px-4 rounded-xl transition">
+                🔊 ቀጣይ ቁጥር ጥራ (Call Next)
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 w-full max-w-sm p-5 rounded-2xl border border-slate-800 flex flex-col gap-3">
+            <h3 class="text-base font-bold text-emerald-400">💳 በቴሌብር ብር ማንቀሳቀስ (Deposit)</h3>
+            <p class="text-xs text-slate-400">ብር ለማንቀሳቀስ በመጀመሪያ ከዚህ በታች ባለው ቁጥር ዝቅተኛው መጠን 50 ብር እና ከህ በላይ ያስተላልፉ።</p>
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs">
+                <span class="text-slate-400 block">የቴሌብር አካውንት ቁጥር:</span>
+                <span class="font-bold text-white text-sm">0998292907</span>
+            </div>
+            <input type="number" id="deposit-amount" placeholder="ያስገቡት የብር መጠን (ቢያንስ 50 ብር)" class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-emerald-500">
+            <input type="text" id="deposit-ref" placeholder="የtransaction ቁጥር (Transaction Reference)" class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-emerald-500">
+            <div class="flex gap-2 mt-2">
+                <button onclick="closeDepositModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-xl text-xs font-medium">ይቅር</button>
+                <button onclick="submitDeposit()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-xs font-bold">ላክ</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Bingo Card Preview Area -->
-    <div id="game-area" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 shadow-lg text-center flex-1 flex flex-col justify-center items-center">
-        <p id="selected-stake-text" class="text-sm text-yellow-400 mb-2 font-medium">እባክዎ መጀመሪያ የካርድ ዋጋ ይምረጡ</p>
-        <div id="bingo-card" class="grid grid-cols-5 gap-1 w-full max-w-[280px] bg-slate-900 p-2 rounded-xl border border-slate-700 hidden">
-            <!-- Generated Bingo Numbers Go Here -->
-        </div>
-        <button id="start-game-btn" onclick="playBingo()" class="mt-4 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl hidden shadow-lg transition">
-            ጨዋታ ጀምር 🎲
-        </button>
-    </div>
-</main>
-
-<!-- Deposit Modal (Min 50 Birr & Telebirr 0998292907) -->
-<div id="deposit-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50"><div class="bg-slate-800 w-full max-w-sm p-5 rounded-2xl border border-slate-700 shadow-2xl">
-        <h3 class="text-lg font-bold text-yellow-400 mb-2">💳 በቴሌብር ብር ማስገባት (Deposit)</h3>
-        <p class="text-xs text-slate-300 mb-3">
-            ብር ለማስገባት በቅድሚያ ከዚህ በታች ባለው ቁጥር ዝቅተኛው መጠን <strong class="text-white">50 ብር እና ከዛ በላይ</strong> ያስተላልፉ።
-        </p>
-        <div class="bg-slate-900 p-3 rounded-xl border border-slate-700 mb-3 text-center">
-            <span class="text-xs text-slate-400 block">የቴሌብር አካውንት ቁጥር</span>
-            <span class="text-emerald-400 font-bold text-lg">0998292907</span>
-        </div>
-        <div class="mb-3">
-            <label class="block text-xs text-slate-400 mb-1">ያስገቡት የብር መጠን (ቢያንስ 50 ብር)</label>
-            <input type="number" id="deposit-amount" placeholder="ምሳሌ: 100" min="50" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-sm focus:outline-none focus:border-yellow-400">
-        </div>
-        <div class="mb-4">
-            <label class="block text-xs text-slate-400 mb-1">የግብይት ቁጥር (Transaction Reference)</label>
-            <input type="text" id="tx-ref" placeholder="የቴሌብር SMS ማረጋገጫ ቁጥር" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-sm focus:outline-none focus:border-yellow-400">
-        </div>
-        <div class="flex gap-2">
-            <button onclick="closeDepositModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 rounded-xl text-sm font-medium">ይቅር</button>
-            <button onclick="submitDeposit()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-sm font-bold">ላክ</button>
+    <!-- Withdraw Modal -->
+    <div id="withdrawModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 w-full max-w-sm p-5 rounded-2xl border border-slate-800 flex flex-col gap-3">
+            <h3 class="text-base font-bold text-red-400">📤 ብር ማወጣት (Withdraw)</h3>
+            <p class="text-xs text-slate-400">ዝቅተኛው የማውጣት መጠን 50 ብር እና ከህ በላይ ነው፡፡</p>
+            <input type="number" id="withdraw-amount" placeholder="ማውጣት የሚፈልጉት የብር መጠን (ቢያንስ 50 ብር)" class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-red-500">
+            <input type="text" id="withdraw-phone" placeholder="የእርስዎ የቴሌብር ስልክ ቁጥር" class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-red-500">
+            <div class="flex gap-2 mt-2">
+                <button onclick="closeWithdrawModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-xl text-xs font-medium">ይቅር</button>
+                <button onclick="submitWithdraw()" class="flex-1 bg-slate-600 hover:bg-slate-500 text-white py-2 rounded-xl text-xs font-bold">አረጋግጥ</button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Withdraw Modal (Min 50 Birr Validation) -->
-<div id="withdraw-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-    <div class="bg-slate-800 w-full max-w-sm p-5 rounded-2xl border border-slate-700 shadow-2xl">
-        <h3 class="text-lg font-bold text-yellow-400 mb-2">📤 ብር ማውጣት (Withdraw)</h3>
-        <p class="text-xs text-slate-300 mb-3">
-            ዝቅተኛው የማውጣት መጠን <strong class="text-white">50 ብር እና ከዛ በላይ</strong> ነው።
-        </p>
-        <div class="mb-3">
-            <label class="block text-xs text-slate-400 mb-1">ማውጣት የሚፈልጉት የብር መጠን (ቢያንስ 50 ብር)</label>
-            <input type="number" id="withdraw-amount" placeholder="ምሳሌ: 100" min="50" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-sm focus:outline-none focus:border-yellow-400">
-        </div>
-        <div class="mb-4">
-            <label class="block text-xs text-slate-400 mb-1">የእርስዎ የቴሌብር ስልክ ቁጥር</label>
-            <input type="text" id="withdraw-phone" placeholder="ምሳሌ: 09..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white text-sm focus:outline-none focus:border-yellow-400">
-        </div>
-        <div class="flex gap-2">
-            <button onclick="closeWithdrawModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 rounded-xl text-sm font-medium">ይቅር</button>
-            <button onclick="submitWithdraw()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-xl text-sm font-bold">ጠይቅ</button>
-        </div>
-    </div>
-</div>
+    <!-- Footer / Branding -->
+    <footer class="w-full text-center py-2 text-xs text-slate-500 mt-4">
+        Abyssinia Bingo &copy; 2026 - All Rights Reserved
+    </footer>
 
-<!-- Footer / Branding -->
-<footer class="w-full text-center py-2 text-xs text-slate-500">
-    Abyssinia Bingo &copy; 2026 - All Rights Reserved
-</footer>
+    <script>
+        let tg = window.Telegram.WebApp;
+        if(tg && tg.expand) { tg.expand(); }
 
-<script>
-    let tg = window.Telegram.WebApp;
-    tg.expand();
+        let userBalance = 0.00;
+        let currentStake = 0;
+        let currentCommission = 0;
+        let availableNumbers = Array.from({length: 75}, (_, i) => i + 1);
 
-    let userBalance = 0.00;
-    let currentStake = 0;
-    let currentCommission = 0;
-
-    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-        const user = tg.initDataUnsafe.user;
-        document.getElementById('username').innerText = `ተጫዋች: ${user.first_name || 'ወዳጅ'}`;
-    } else {
-        document.getElementById('username').innerText =-4 rounded-2xl
-    }
-
-    function updateUI() {
-        document.getElementById('user-balance').innerText = flex justify-between items-cent
-    }
-
-    function selectStake(amount, commission) {if (userBalance < amount) {
-            alert(`የእርስዎ አካውንት ባላንስ (${userBalance} ብር) የ ${amount} ብር ካርድ ለመግዛት በቂ አይደለም። እባክዎ መጀመሪያ ብር ያስገቡ (ቢያንስ 50 ብር)!`);
-            return;
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            document.getElementById('username').innerText = `ተጫዋች: ${user.first_name || 'ဧည့်ኛ'}`;
+        } else {
+            document.getElementById('username').innerText = 'ተጫዋች (ဧည့်ኛ)';
         }
-        currentStake = amount;
-        currentCommission = commission;
-        document.getElementById('selected-stake-text').innerText =l border border-slate-700">
-        <span class="text-
-        
-        generateBingoCard();
-        document.getElementById('bingo-card').classList.remove('hidden');
-        document.getElementById('start-game-btn').classList.remove('hidden');
-    }
 
-    function generateBingoCard() {
-        const cardGrid = document.getElementById('bingo-card');
-        cardGrid.innerHTML = '';
-        for (let i = 0; i < 25; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'bingo-cell bg-slate-800 text-slate-200 rounded-lg text-xs border border-slate-700 hover:bg-yellow-500 hover:text-slate-950';
-            cell.innerText = Math.floor(Math.random() * 75) + 1;
-            cell.onclick = function() {
-                this.classList.toggle('bg-yellow-500');
-                this.classList.toggle('text-slate-950');
-            };
-            cardGrid.appendChild(cell);
+        function updateUI() {
+            document.getElementById('user-balance').innerText = userBalance.toFixed(2) + ' ብር';
         }
-    }
 
-    function playBingo() {
-        if (userBalance < currentStake) {
-            alert('በቂ ባላንስ የለዎትም!');
-            return;
+        function selectStake(amount, commission) {
+            currentStake = amount;
+            currentCommission = commission;
+            document.getElementById('selected-stake-info').innerText = `የተመረጠው ውርርድ: ${amount} ብር (ኮሚሽን ${commission}%)`;
         }
-        userBalance -= currentStake;
+
+        // Text-to-Speech Voice Feature for Bingo Numbers
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0; 
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function startPlay() {
+            if (currentStake === 0) {
+                alert('⚠️ እባክዎ መጀመሪያ የክፍያ ዋጋ ይምረጡ!');
+                return;
+            }
+            if (userBalance < currentStake) {
+                alert('⚠️ በሂሳብዎ ውስጥ በቂ ገንዘብ లేదు! እባክዎ ዴፖዚት ያድርጉ።');
+                openDepositModal();
+                return;
+            }
+            
+            userBalance -= currentStake;
+            updateUI();
+            
+            document.getElementById('game-arena').classList.remove('hidden');
+            document.getElementById('game-arena').classList.add('flex');
+            
+            speakText("ጨዋታው ተጀምሯል! መልካም ዕድል!");
+            alert(`🎉 ጨዋታው በ ${currentStake} ብር ተጀምሯል!`);
+        }
+
+        function callNextNumber() {
+            if (availableNumbers.length === 0) {
+                speakText("ሁሉም ቁጥሮች ተጠርተዋል!");
+                alert("🏁 ሁሉም ቁጥሮች ተጠርተዋል!");
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+            const selectedNum = availableNumbers.splice(randomIndex, 1)[0];
+            
+            document.getElementById('called-number.innerText = selectedNum;'); // Fixed below properly
+            document.getElementById('called-number').innerText = selectedNum;
+            
+            // Speak out the number loudly via browser voice
+            speakText(`ቁጥር ${selectedNum}`);
+        }
+
+        function openDepositModal() {
+            document.getElementById('depositModal').classList.remove('hidden');
+            document.getElementById('depositModal').classList.add('flex');
+        }
+
+        function closeDepositModal() {
+            document.getElementById('depositModal').classList.remove('flex');
+            document.getElementById('depositModal').classList.add('hidden');
+        }
+
+        function submitDeposit() {
+            const amountInput = document.getElementById('deposit-amount').value;
+            const refInput = document.getElementById('deposit-ref').value;
+            const amount = parseFloat(amountInput);
+
+            if (isNaN(amount) || amount < 50) {
+                alert('⚠️ እባክዎ ቢያንስ 50 ብር እና ከህ በላይ ያስገቡ!');
+                return;
+            }
+            if (!refInput) {
+                alert('⚠️ እባክዎ የትራንዛክሽን ቁጥር (Transaction Reference) ያስገቡ!');
+                return;
+            }
+
+            userBalance += amount;
+            updateUI();
+            speakText("የብር ማስገባት ጥያቄዎ ተልኳል");
+            alert(`✅ ${amount} ብር የደረሰኝ ጥያቄ በተሳካ ሁኔታ ተላከ!`);
+            closeDepositModal();
+        }
+
+        function openWithdrawModal() {
+            document.getElementById('withdrawModal').classList.remove('hidden');
+            document.getElementById('withdrawModal').classList.add('flex');
+        }
+
+        function closeWithdrawModal() {
+            document.getElementById('withdrawModal').classList.remove('flex');
+            document.getElementById('withdrawModal').classList.add('hidden');
+        }
+
+        function submitWithdraw() {
+            const amountInput = document.getElementById('withdraw-amount').value;
+            const phoneInput = document.getElementById('withdraw-phone').value;
+            const amount = parseFloat(amountInput);
+
+            if (isNaN(amount) || amount < 50) {
+                alert('⚠️ እባክዎ ቢያንስ 50 ብር እና ከህ በላይ ለማውጣት ይጠይቁ!');
+                return;
+            }
+            if (amount > userBalance) {
+                alert('⚠️ በሂሳብዎ ውስጥ ያለው መጠን በቂ አይደለም!');
+                return;
+            }
+            if (!phoneInput) {
+                alert('⚠️ እባክዎ የቴሌብር ስልክ ቁጥርዎን ያስገቡ!');
+                return;
+            }
+
+            userBalance -= amount;
+            updateUI();
+            speakText("የብር ማውጣት ጥያቄዎ ተልኳል");
+            alert(`✅ ${amount} ብር የማውጣት ጥያቄ በተሳካ ሁኔታ ተላከ!`);
+            closeWithdrawModal();
+        }
+
         updateUI();
-        
-        alert(`ጨዋታው ተጀምሯል! 🎫 የካርድ ዋጋ: ${currentStake} ብር ተቀናሽ ሆኗል። ድል ለናንተ ይሁን!`);
-    }
-
-    function openDepositModal() {
-        document.getElementById('deposit-modal').classList.remove('hidden');
-    }
-
-    function closeDepositModal() {
-        document.getElementById('deposit-modal').classList.add('hidden');
-    }
-
-    function openWithdrawModal() {
-        document.getElementById('withdraw-modal').classList.remove('hidden');
-    }
-
-    function closeWithdrawModal() {
-        document.getElementById('withdraw-modal').classList.add('hidden');
-    }
-
-    function submitDeposit() {
-        const amountInput = document.getElementById('deposit-amount').value;
-        const txRef = document.getElementById('tx-ref').value;
-        const amount = parseFloat(amountInput);
-
-        if (isNaN(amount) || amount < 50) {
-            alert('⚠️ እባክዎ ቢያንስ 50 ብር እና ከዛ በላይ ያስገቡ!');
-            return;
-        }
-
-        if (!txRef) {
-            alert('⚠️ እባክዎ የግብይት ቁጥር (Transaction Reference) ያስገቡ!');
-            return;
-        }
-
-        alert(`የ ${amount} ብር የዴፖዚት ጥያቄዎ በተሳካ ሁኔታ ተልኳል! አድሚኑ አረጋግጦ አካውንትዎ ላይ ይጨምረዋል።`);
-        closeDepositModal();
-    }
-
-    function submitWithdraw() {
-        const amountInput = document.getElementById('withdraw-amount').value;
-        const phoneInput = document.getElementById('withdraw-phone').value;
-        const amount = parseFloat(amountInput);
-
-        if (isNaN(amount) || amount < 50) {
-            alert('⚠️ እባክዎ ቢያንስ 50 ብር እና ከዛ በላይ ለማውጣት ይጠይቁ!');
-            return;
-        }
-
-        if (amount > userBalance) {
-            alert('⚠️ በአካውንትዎ ውስጥ ያለው ባላንስ በቂ አይደለም!');
-            return;
-        }
-
-        if (!phoneInput) {
-            alert('⚠️ እባክዎ የቴሌብር ስልክ ቁጥርዎን ያስገቡ!');
-            return;
-        }
-
-        userBalance -= amount;
-        updateUI();
-        alert(`የ ${amount} ብር የማውጣት ጥያቄዎ በተሳካ ሁኔታ ተልኳል! በአጭር ጊዜ ውስጥ ወደ ቴሌብር ቁጥርዎ ይላካል።`);
-        closeWithdrawModal();
-    }
-
-    updateUI();
-</script>
+    </script>
 </body>
 </html>
-
-
